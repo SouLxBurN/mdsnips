@@ -1,0 +1,21 @@
+.viewMDSnippet {
+    font-size: calc(10px + 2vmin);
+    max-width: 50%;
+    margin: auto;
+    padding: 0 10px;
+}
+
+.wmde-markdown-color code[class*="language-"] {
+    color: white;
+}
+
+.wmde-markdown pre code {
+    background-color: black;
+    text-shadow: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .viewMDSnippet {
+        max-width: 100%;
+    }
+}
