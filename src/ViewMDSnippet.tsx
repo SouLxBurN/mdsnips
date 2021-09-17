@@ -1,44 +1,47 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import MDEditor from '@uiw/react-md-editor';
+import Banner from './components/Banner';
+import { getSnippet } from './service/MDApi';
 import './ViewMDSnippet.css';
+import './MDEditor.css';
+
+interface ViewMDSnippetParams {
+    id: string
+}
+
+interface ViewLocState {
+    updateKey: string
+}
 
 export default function ViewMDSnippet() {
-    const { id } = useParams<any>();
+    const updateKey = useLocation<ViewLocState>().state?.updateKey;
+    const { id } = useParams<ViewMDSnippetParams>();
     const [title, setTitle] = useState('loading...');
     const [content, setContent] = useState('loading...');
+    const [renderBanner, setRenderBanner] = useState(true);
+
+    const displayBanner = renderBanner && updateKey !== undefined;
 
     useEffect(() => {
-        async function getSnippet(id: string) {
-            try {
-                const headers = new Headers();
-                headers.append(
-                    'Authorization',
-                    'Basic ' + Buffer.from('soul:burn').toString('base64')
-                );
-                const response = await fetch(`http://localhost:3001/md/${id}`, {
-                    headers: headers
-                });
-                if (response.ok) {
-                    const json = await response.json();
-                    setTitle(json.title);
-                    setContent(json.body);
-                } else {
-                    setContent('Unauthorized');
-                }
-            } catch (err: any) {
-                console.log(err.message);
-                setContent(err.message);
-            }
+        async function getWrapper(id: string) {
+            const snippet = await getSnippet(id);
+            setTitle(snippet!.title);
+            setContent(snippet!.body);
         }
-
-        getSnippet(id);
+        getWrapper(id);
     }, [id]);
+
+    function onBannerClose() {
+        setRenderBanner(false);
+    }
 
     return (
         <div className="viewMDSnippet">
-            <h1>{ title }</h1>
-            <MDEditor.Markdown source={ content } />
+            {displayBanner && <Banner message={`Keep this to edit your snippet: ${updateKey}`} color="green" onClose={onBannerClose}/>}
+            <h1>{title}</h1>
+            <hr />
+            <MDEditor.Markdown source={content} />
         </div>
     );
 }
