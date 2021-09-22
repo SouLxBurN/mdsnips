@@ -1,22 +1,26 @@
 export interface MDSnippet {
-    id: string,
-    title: string,
-    body: string,
-    updateKey: string,
-    createDate: Date
+    id: string;
+    title: string;
+    body: string;
+    updateKey: string;
+    createDate: Date;
 }
 
 export interface MDCreateRequest {
-    title: string,
-    body: string
+    title: string;
+    body: string;
 }
 
 export interface MDUpdateRequest {
-    id: string,
-    title: string,
-    body: string,
-    updateKey: string
+    id: string;
+    title: string;
+    body: string;
+    updateKey: string;
 }
+
+const apiHost = process.env.REACT_APP_API_HOSTNAME;
+const apiUser = process.env.REACT_APP_API_USER;
+const apiPass = process.env.REACT_APP_API_PASS;
 
 /**
  * Make an API call to SouLxSnips API to fetch a Markdown Snippet.
@@ -24,14 +28,11 @@ export interface MDUpdateRequest {
  * @param {string} id
  * @returns {Promise<MDSnippet|null>}
  */
-export async function getSnippet(id: string): Promise<MDSnippet|null> {
+export async function getSnippet(id: string): Promise<MDSnippet | null> {
     try {
         const headers = new Headers();
-        headers.append(
-            'Authorization',
-            'Basic ' + Buffer.from('soul:burn').toString('base64')
-        );
-        const response = await fetch(`http://localhost:3001/md/${id}`, {
+        headers.append('Authorization', getAuthToken());
+        const response = await fetch(`${apiHost}/md/${id}`, {
             headers: headers
         });
         if (response.ok) {
@@ -52,17 +53,17 @@ export async function getSnippet(id: string): Promise<MDSnippet|null> {
  * @param {MDCreateRequest} req
  * @returns {Promise<MDSnippet|null>}
  */
-export async function createMDSnippet(req: MDCreateRequest): Promise<MDSnippet|null> {
+export async function createMDSnippet(req: MDCreateRequest): Promise<MDSnippet | null> {
     const payload = {
         title: req.title,
         body: req.body
     };
     try {
         const headers = new Headers();
-        headers.append('Authorization', 'Basic ' + Buffer.from('soul:burn').toString('base64'));
+        headers.append('Authorization', getAuthToken());
         headers.append('Content-Type', 'application/json');
 
-        const response = await fetch(`http://localhost:3001/md`, {
+        const response = await fetch(`${apiHost}/md`, {
             headers: headers,
             method: 'POST',
             body: JSON.stringify(payload)
@@ -85,7 +86,7 @@ export async function createMDSnippet(req: MDCreateRequest): Promise<MDSnippet|n
  * @param {MDUpdateRequest} req
  * @returns {Promise<MDSnippet|null>}
  */
-export async function updateMDSnippet(req: MDUpdateRequest): Promise<MDSnippet|null> {
+export async function updateMDSnippet(req: MDUpdateRequest): Promise<MDSnippet | null> {
     const payload = {
         id: req.id,
         title: req.title,
@@ -94,10 +95,10 @@ export async function updateMDSnippet(req: MDUpdateRequest): Promise<MDSnippet|n
     };
     try {
         const headers = new Headers();
-        headers.append('Authorization', 'Basic ' + Buffer.from('soul:burn').toString('base64'));
+        headers.append('Authorization', getAuthToken());
         headers.append('Content-Type', 'application/json');
 
-        const response = await fetch(`http://localhost:3001/md`, {
+        const response = await fetch(`${apiHost}/md`, {
             headers: headers,
             method: 'PATCH',
             body: JSON.stringify(payload)
@@ -112,4 +113,11 @@ export async function updateMDSnippet(req: MDUpdateRequest): Promise<MDSnippet|n
     }
 
     return null;
+}
+
+/**
+ * Creates Basic Authoization token in Base64.
+ */
+function getAuthToken() {
+    return 'Basic ' + Buffer.from(`${apiUser}:${apiPass}`).toString('base64');
 }
