@@ -2,6 +2,7 @@ import { useState } from 'react';
 import MDTitle from './MDTitle';
 import MDEditor from '@uiw/react-md-editor';
 import { MDSnippet, createMDSnippet } from '../service/MDApi'
+import useWindowDimensions from '../hooks/useWindowDimensions';
 
 interface CreateMDFormProps {
     onSuccess(newSnippet: MDSnippet): void
@@ -11,6 +12,7 @@ interface CreateMDFormProps {
 export default function CreateMDForm(props: CreateMDFormProps) {
     const [title, setTitle] = useState<string>('');
     const [content, setContent] = useState<string>('# Start Here');
+    const { width, height } = useWindowDimensions();
 
     async function saveSnippet(e: React.FormEvent) {
         e.preventDefault();
@@ -26,7 +28,7 @@ export default function CreateMDForm(props: CreateMDFormProps) {
     }
 
     return (
-        <form onSubmit={(e: React.FormEvent) => saveSnippet(e)}>
+        <form className="editor__form" onSubmit={(e: React.FormEvent) => saveSnippet(e)}>
             <div className="editor">
                 <MDTitle
                     value={title}
@@ -35,8 +37,10 @@ export default function CreateMDForm(props: CreateMDFormProps) {
                     }}
                 />
                 <MDEditor
+                    preview={width > 860 ? 'live' : 'edit'}
                     value={content}
-                    height={500}
+                    visiableDragbar={false}
+                    height={height * 0.75}
                     onChange={(val) => {
                         setContent(val!);
                     }}

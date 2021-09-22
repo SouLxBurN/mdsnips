@@ -17,7 +17,7 @@ export default function CreateMDSnippet() {
     }
 
     return (
-        <div className="createMDSnippet">
+        <div className="editor__wrapper">
             <h1>SouLxSnips</h1>
             <CreateMDForm
                 onSuccess={(snippet) => onSuccess(snippet)}
