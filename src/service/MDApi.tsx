@@ -48,6 +48,29 @@ export async function getSnippet(id: string): Promise<MDSnippet | null> {
 }
 
 /**
+ * Make an API call to SouLxSnips API to fetch a list of Markdown Snippets.
+ *
+ * @returns {Promise<Array<MDSnippet>>>}
+ */
+export async function getSnippetList(): Promise<Array<MDSnippet>> {
+    try {
+        const headers = new Headers();
+        headers.append('Authorization', getAuthToken());
+        const response = await fetch(`${apiHost}/md`, {
+            headers: headers
+        });
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.error(response.status, response.statusText);
+        }
+    } catch (err: any) {
+        console.log(err.message);
+    }
+    return [];
+}
+
+/**
  * Make an API call to SouLxSnips API to create a Markdown Snippet.
  *
  * @param {MDCreateRequest} req

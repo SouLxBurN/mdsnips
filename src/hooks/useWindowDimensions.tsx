@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+// https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {

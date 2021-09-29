@@ -16,3 +16,73 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.header {
+    width: 100%;
+    padding: 10px 20px;
+    background: #FF5A1A;
+}
+
+.header__link {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+}
+
+.header__brand {
+    font-size: 2.5em;
+}
+
+.content {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 15px 4%;
+    border: 2px solid gray;
+}
+
+.content__main {
+    flex: 100%;
+}
+
+.content__sidebar {
+    flex: 0 0 100%;
+    border: 2px solid gray;
+}
+
+.content__sidebar__title {
+    margin: 0 auto;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+}
+
+.snippetList__item {
+    padding: 10px;
+    font-size: 0.8em;
+}
+
+.snippetList__item__date {
+    font-style: italic;
+}
+
+.snippetList__item a {
+    color: inherit;
+}
+
+@media screen and (min-width: 1160px) {
+    .content__main {
+        flex: auto;
+    }
+
+    .content__sidebar {
+        flex: 0 0 22%;
+        margin-left: 10px;
+    }
+}
+

@@ -1,6 +1,9 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { MDSnippet } from './service/MDApi';
 import UpdateMDForm from './components/UpdateMDForm';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SnippetList from './components/SnippetList';
 import './MDEditor.css';
 import './CreateMDSnippet.css';
 
@@ -17,13 +20,23 @@ export default function UpdateMDSnippet() {
         });
     }
     return (
-        <div className="editor__wrapper">
-            <h1>SouLxSnips</h1>
-            <UpdateMDForm
-                id={id}
-                onSuccess={(snippet) => onSuccess(snippet)}
-                onFailure={(error) => console.log(error)}
-            />
+        <div>
+            <Header/>
+            <div className="content">
+                <div className="content__main">
+                <UpdateMDForm
+                    id={id}
+                    onSuccess={(snippet) => onSuccess(snippet)}
+                    onFailure={(error) => console.log(error)}
+                />
+                </div>
+                <div className="content__sidebar">
+                    <p className="content__sidebar__title">Recent Snips</p>
+                    <hr/>
+                    <SnippetList/>
+                </div>
+            </div>
+            <Footer/>
         </div>
     );
 }

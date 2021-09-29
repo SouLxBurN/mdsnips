@@ -3,10 +3,6 @@
     width: 100%;
 }
 
-.editor__wrapper {
-  margin: 0 4%;
-}
-
 .editor__title {
     display: flex;
     justify-content: space-between;
@@ -17,11 +13,29 @@
 
 .editor__titleInput {
     width: 100%;
-    margin: 0 0 0 10px;
 }
 
 .editor__bottomBar {
-    display: flex;
-    justify-content: right;
-    padding: 10px;
+    padding: 10px 0;
+}
+
+.editor__editKey {
+    padding: 8px 0;
+}
+
+.editor__editKeyInput {
+    width: 100%;
+}
+
+.editor__submitButton {
+    width: 100%;
+    height: 50px;
+}
+
+@media screen and (min-width: 1160px) {
+
+    .editor__bottomBar {
+        padding: 10px 0 0 0;
+    }
+
 }

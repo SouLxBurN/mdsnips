@@ -41,12 +41,13 @@ export default function CreateMDForm(props: CreateMDFormProps) {
                     value={content}
                     visiableDragbar={false}
                     height={height * 0.75}
+                    toolbarHeight={50}
                     onChange={(val) => {
                         setContent(val!);
                     }}
                 />
                 <div className="editor__bottomBar">
-                    <button className="submitButton">Save</button>
+                    <button className="editor__submitButton">Create Snippet</button>
                 </div>
             </div>
         </form>

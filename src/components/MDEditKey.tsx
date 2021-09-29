@@ -6,10 +6,10 @@ interface MDEditKeyProps {
 export default function MDEditKey(props: MDEditKeyProps) {
     return (
         <div className="editor__editKey">
-            <span>Edit Key:</span>
             <input className="editor__editKeyInput"
                 type="password"
                 value={props.value}
+                placeholder="Edit Key"
                 onChange={(e) => props.onChange(e.target.value)}
             />
         </div>

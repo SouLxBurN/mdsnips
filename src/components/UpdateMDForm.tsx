@@ -54,7 +54,7 @@ export default function UpdateMDForm(props: UpdateMDFormProps) {
                     value={content}
                     preview={width > 860 ? 'live' : 'edit'}
                     visiableDragbar={false}
-                    height={height * 0.75}
+                    height={height * 0.70}
                     onChange={(val) => {
                         setContent(val!);
                     }}
@@ -66,7 +66,7 @@ export default function UpdateMDForm(props: UpdateMDFormProps) {
                             setUpdateKey(value);
                         }}
                     />
-                    <button className="submitButton">Save</button>
+                    <button className="editor__submitButton">Update Snippet</button>
                 </div>
             </div>
         </form>
