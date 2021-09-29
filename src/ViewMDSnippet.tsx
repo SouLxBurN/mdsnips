@@ -5,6 +5,8 @@ import Banner from './components/Banner';
 import { getSnippet } from './service/MDApi';
 import './ViewMDSnippet.css';
 import './MDEditor.css';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 interface ViewMDSnippetParams {
     id: string
@@ -37,11 +39,15 @@ export default function ViewMDSnippet() {
     }
 
     return (
-        <div className="viewMDSnippet">
-            {displayBanner && <Banner message={`Keep this to edit your snippet: ${updateKey}`} color="green" onClose={onBannerClose}/>}
-            <h1>{title}</h1>
-            <hr />
-            <MDEditor.Markdown source={content} />
+        <div>
+            <Header/>
+            <div className="viewMDSnippet">
+                {displayBanner && <Banner message={`Keep this to edit your snippet: ${updateKey}`} color="green" onClose={onBannerClose}/>}
+                <h1>{title}</h1>
+                <hr />
+                <MDEditor.Markdown source={content} />
+            </div>
+            <Footer/>
         </div>
     );
 }

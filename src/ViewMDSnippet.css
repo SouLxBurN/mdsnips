@@ -3,6 +3,7 @@
     max-width: 50%;
     margin: auto;
     padding: 0 10px;
+    min-height: 100vh;
 }
 
 @media only screen and (max-width: 600px) {
