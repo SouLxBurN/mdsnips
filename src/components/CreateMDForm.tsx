@@ -11,7 +11,7 @@ interface CreateMDFormProps {
 
 export default function CreateMDForm(props: CreateMDFormProps) {
     const [title, setTitle] = useState<string>('');
-    const [content, setContent] = useState<string>('# Start Here');
+    const [content, setContent] = useState<string>('');
     const { width, height } = useWindowDimensions();
 
     async function saveSnippet(e: React.FormEvent) {

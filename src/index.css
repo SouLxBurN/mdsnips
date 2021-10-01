@@ -33,23 +33,23 @@ code {
     font-size: 2.5em;
 }
 
-.content {
+.snipContent {
     display: flex;
     flex-flow: row wrap;
     padding: 15px 4%;
     border: 2px solid gray;
 }
 
-.content__main {
+.snipContent__main {
     flex: 100%;
 }
 
-.content__sidebar {
+.snipContent__sidebar {
     flex: 0 0 100%;
     border: 2px solid gray;
 }
 
-.content__sidebar__title {
+.snipContent__sidebar__title {
     margin: 0 auto;
     font-size: 1em;
     font-weight: bold;
@@ -76,11 +76,11 @@ code {
 }
 
 @media screen and (min-width: 1160px) {
-    .content__main {
+    .snipContent__main {
         flex: auto;
     }
 
-    .content__sidebar {
+    .snipContent__sidebar {
         flex: 0 0 22%;
         margin-left: 10px;
     }

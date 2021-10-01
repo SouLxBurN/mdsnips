@@ -23,7 +23,7 @@ const apiUser = process.env.REACT_APP_API_USER;
 const apiPass = process.env.REACT_APP_API_PASS;
 
 /**
- * Make an API call to SouLxSnips API to fetch a Markdown Snippet.
+ * Make an API call to MDSnips API to fetch a Markdown Snippet.
  *
  * @param {string} id
  * @returns {Promise<MDSnippet|null>}
@@ -48,7 +48,7 @@ export async function getSnippet(id: string): Promise<MDSnippet | null> {
 }
 
 /**
- * Make an API call to SouLxSnips API to fetch a list of Markdown Snippets.
+ * Make an API call to MDSnips API to fetch a list of Markdown Snippets.
  *
  * @returns {Promise<Array<MDSnippet>>>}
  */
@@ -71,7 +71,7 @@ export async function getSnippetList(): Promise<Array<MDSnippet>> {
 }
 
 /**
- * Make an API call to SouLxSnips API to create a Markdown Snippet.
+ * Make an API call to MDSnips API to create a Markdown Snippet.
  *
  * @param {MDCreateRequest} req
  * @returns {Promise<MDSnippet|null>}
@@ -104,7 +104,7 @@ export async function createMDSnippet(req: MDCreateRequest): Promise<MDSnippet |
 }
 
 /**
- * Make an API call to SouLxSnips API to update a Markdown Snippet.
+ * Make an API call to MDSnips API to update a Markdown Snippet.
  *
  * @param {MDUpdateRequest} req
  * @returns {Promise<MDSnippet|null>}

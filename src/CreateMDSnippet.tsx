@@ -22,14 +22,14 @@ export default function CreateMDSnippet() {
     return (
         <div>
             <Header/>
-            <div className="content">
-                <div className="content__main">
+            <div className="snipContent">
+                <div className="snipContent__main">
                     <CreateMDForm
                         onSuccess={(snippet) => onSuccess(snippet)}
                         onFailure={(error) => console.log(error)}/>
                 </div>
-                <div className="content__sidebar">
-                    <p className="content__sidebar__title">Recent Snips</p>
+                <div className="snipContent__sidebar">
+                    <p className="snipContent__sidebar__title">Recent Snips</p>
                     <hr/>
                     <SnippetList/>
                 </div>

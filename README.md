@@ -1,4 +1,4 @@
-# SouLxSnips-React
+# MDSnips
 
 ## Available Scripts
 
