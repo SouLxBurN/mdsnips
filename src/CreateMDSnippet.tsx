@@ -20,7 +20,7 @@ export default function CreateMDSnippet() {
     }
 
     return (
-        <div>
+        <div className="appContainer">
             <Header/>
             <div className="snipContent">
                 <div className="snipContent__main">

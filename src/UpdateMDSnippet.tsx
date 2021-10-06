@@ -4,6 +4,7 @@ import UpdateMDForm from './components/UpdateMDForm';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SnippetList from './components/SnippetList';
+import './index.css';
 import './MDEditor.css';
 import './CreateMDSnippet.css';
 
@@ -20,18 +21,18 @@ export default function UpdateMDSnippet() {
         });
     }
     return (
-        <div>
+        <div className="appContainer">
             <Header/>
-            <div className="content">
-                <div className="content__main">
+            <div className="snipContent">
+                <div className="snipContent__main">
                 <UpdateMDForm
                     id={id}
                     onSuccess={(snippet) => onSuccess(snippet)}
                     onFailure={(error) => console.log(error)}
                 />
                 </div>
-                <div className="content__sidebar">
-                    <p className="content__sidebar__title">Recent Snips</p>
+                <div className="snipContent__sidebar">
+                    <p className="snipContent__sidebar__title">Recent Snips</p>
                     <hr/>
                     <SnippetList/>
                 </div>

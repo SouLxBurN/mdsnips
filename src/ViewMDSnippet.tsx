@@ -39,11 +39,11 @@ export default function ViewMDSnippet() {
     }
 
     return (
-        <div>
+        <div className="appContainer">
             <Header/>
+            {displayBanner && <Banner message={`Keep this to edit your snippet: ${updateKey}`} color="#a3be8c" onClose={onBannerClose}/>}
             <div className="viewMDSnippet">
-                {displayBanner && <Banner message={`Keep this to edit your snippet: ${updateKey}`} color="green" onClose={onBannerClose}/>}
-                <h1>{title}</h1>
+                <h1 className="mdTitle">{title}</h1>
                 <hr />
                 <MDEditor.Markdown source={content} />
             </div>
