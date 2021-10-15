@@ -9,6 +9,8 @@ interface BannerProps {
 }
 
 export default function Banner(props: BannerProps) {
+    if (props.message.length <= 0) return (<></>);
+
     return (
         <div className="banner" style={{ backgroundColor: props.color}}>
             <span className="banner__message">{props.message}</span>

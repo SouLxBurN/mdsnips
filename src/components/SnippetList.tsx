@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getSnippetList, MDSnippet } from '../service/MDApi';
+import { getSnippetList, MDSnippet, MDSortBy } from '../service/MDApi';
 
 export default function SnippetList() {
     const [snippetList, setSnippetList] = useState<Array<MDSnippet>>([]);
 
+
     useEffect(() => {
         async function getWrapper() {
-            const list = await getSnippetList();
-            setSnippetList(list.length <= 12 ? list.reverse() : list.slice(list.length-12, list.length).reverse());
+            const list = await getSnippetList({limit: 12, sort: MDSortBy.CREATEDATE_DESC});
+            setSnippetList(list);
         }
         getWrapper();
     }, []);

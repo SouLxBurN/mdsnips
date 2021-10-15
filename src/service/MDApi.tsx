@@ -18,6 +18,18 @@ export interface MDUpdateRequest {
     updateKey: string;
 }
 
+export interface MDSearchParams {
+    text?: string;
+    limit?: number;
+    skip?: number;
+    sort?: MDSortBy;
+}
+
+export enum MDSortBy {
+    CREATEDATE_DESC = 'createDate_DESC',
+    CREATEDATE_ASC = 'createDate_ASC'
+}
+
 const apiHost = process.env.REACT_APP_API_HOSTNAME;
 const apiUser = process.env.REACT_APP_API_USER;
 const apiPass = process.env.REACT_APP_API_PASS;
@@ -49,14 +61,24 @@ export async function getSnippet(id: string): Promise<MDSnippet | null> {
 
 /**
  * Make an API call to MDSnips API to fetch a list of Markdown Snippets.
- *
+ * @param {MDSearchParams} searchParams
  * @returns {Promise<Array<MDSnippet>>>}
  */
-export async function getSnippetList(): Promise<Array<MDSnippet>> {
+export async function getSnippetList({text, limit=10, skip=0, sort=MDSortBy.CREATEDATE_DESC}: MDSearchParams): Promise<Array<MDSnippet>> {
     try {
+        let queryParams = `?sort=${sort}`;
+        queryParams += `&limit=${limit}`;
+
+        if (text) {
+            queryParams += `&text=${text}`;
+        }
+        if (skip) {
+            queryParams += `&skip=${skip}`;
+        }
+
         const headers = new Headers();
         headers.append('Authorization', getAuthToken());
-        const response = await fetch(`${apiHost}/md`, {
+        const response = await fetch(`${apiHost}/md/search${queryParams}`, {
             headers: headers
         });
         if (response.ok) {

@@ -1,13 +1,15 @@
+import { useState } from 'react';
 import {  useHistory } from 'react-router-dom';
 import { MDSnippet } from './service/MDApi';
 import CreateMDForm from './components/CreateMDForm';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Page from './components/Page';
 import SnippetList from './components/SnippetList';
+
 import './CreateMDSnippet.css';
 import './MDEditor.css';
 
 export default function CreateMDSnippet() {
+    const [bannerMessage, setBannerMessage] = useState('');
     const history = useHistory();
 
     function onSuccess(snippet: MDSnippet) {
@@ -19,14 +21,23 @@ export default function CreateMDSnippet() {
         });
     }
 
+    function onBannerClose() {
+        setBannerMessage('');
+        console.log('Closing Banner');
+    }
+
+    function onFailure(errorMessage: string) {
+        setBannerMessage(errorMessage);
+        console.log(errorMessage)
+    }
+
     return (
-        <div className="appContainer">
-            <Header/>
+        <Page bannerMessage={bannerMessage} bannerColor='#bf616a' onBannerClose={() => onBannerClose}>
             <div className="snipContent">
                 <div className="snipContent__main">
                     <CreateMDForm
-                        onSuccess={(snippet) => onSuccess(snippet)}
-                        onFailure={(error) => console.log(error)}/>
+                        onSuccess={(snippet: MDSnippet) => onSuccess(snippet)}
+                        onFailure={(error: Error) => onFailure(error.message)}/>
                 </div>
                 <div className="snipContent__sidebar">
                     <p className="snipContent__sidebar__title">Recent Snips</p>
@@ -34,7 +45,6 @@ export default function CreateMDSnippet() {
                     <SnippetList/>
                 </div>
             </div>
-            <Footer/>
-        </div>
+        </Page>
     );
 }
