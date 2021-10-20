@@ -41,7 +41,6 @@ const apiPass = process.env.REACT_APP_API_PASS;
  * @returns {Promise<MDSnippet|null>}
  */
 export async function getSnippet(id: string): Promise<MDSnippet | null> {
-    try {
         const headers = new Headers();
         headers.append('Authorization', getAuthToken());
         const response = await fetch(`${apiHost}/md/${id}`, {
@@ -51,11 +50,7 @@ export async function getSnippet(id: string): Promise<MDSnippet | null> {
             return response.json();
         } else {
             console.error(response.status, response.statusText);
-            // TODO Fix this? Its not always because of auth.
         }
-    } catch (err: any) {
-        console.log(err.message);
-    }
     return null;
 }
 
@@ -64,7 +59,9 @@ export async function getSnippet(id: string): Promise<MDSnippet | null> {
  * @param {MDSearchParams} searchParams
  * @returns {Promise<Array<MDSnippet>>>}
  */
-export async function getSnippetList({text, limit=10, skip=0, sort=MDSortBy.CREATEDATE_DESC}: MDSearchParams): Promise<Array<MDSnippet>> {
+export async function getSnippetList(searchParams: MDSearchParams): Promise<Array<MDSnippet>> {
+    const {text, limit=10, skip=0, sort=MDSortBy.CREATEDATE_DESC} = searchParams;
+
     try {
         let queryParams = `?sort=${sort}`;
         queryParams += `&limit=${limit}`;

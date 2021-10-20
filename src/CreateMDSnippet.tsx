@@ -8,10 +8,19 @@ import SnippetList from './components/SnippetList';
 import './CreateMDSnippet.css';
 import './MDEditor.css';
 
+/**
+ * Create Markdown Snippet Page
+ */
 export default function CreateMDSnippet() {
     const [bannerMessage, setBannerMessage] = useState('');
     const history = useHistory();
 
+    /**
+     * onSuccess
+     * Handler function when submitting new markdown snippet.
+     *
+     * @param {MDSnippet} snippet
+     */
     function onSuccess(snippet: MDSnippet) {
         history.push({
             pathname: `/${snippet.id}`,
@@ -21,11 +30,21 @@ export default function CreateMDSnippet() {
         });
     }
 
+    /**
+     * onBannerClose
+     * onClick handler for when a user closes the banner.
+     */
     function onBannerClose() {
         setBannerMessage('');
         console.log('Closing Banner');
     }
 
+    /**
+     * onFailure
+     * Handler function when a submission fails.
+     *
+     * @param {string} errorMessage
+     */
     function onFailure(errorMessage: string) {
         setBannerMessage(errorMessage);
         console.log(errorMessage)

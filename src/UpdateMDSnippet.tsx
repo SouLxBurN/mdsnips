@@ -1,8 +1,7 @@
 import { useHistory, useParams } from 'react-router-dom';
+import Page from './components/Page';
 import { MDSnippet } from './service/MDApi';
 import UpdateMDForm from './components/UpdateMDForm';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import SnippetList from './components/SnippetList';
 import './index.css';
 import './MDEditor.css';
@@ -21,8 +20,7 @@ export default function UpdateMDSnippet() {
         });
     }
     return (
-        <div className="appContainer">
-            <Header/>
+        <Page>
             <div className="snipContent">
                 <div className="snipContent__main">
                 <UpdateMDForm
@@ -37,7 +35,6 @@ export default function UpdateMDSnippet() {
                     <SnippetList/>
                 </div>
             </div>
-            <Footer/>
-        </div>
+        </Page>
     );
 }

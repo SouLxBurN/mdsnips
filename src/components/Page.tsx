@@ -9,7 +9,17 @@ interface PageProps {
     children: React.ReactNode
 }
 
-export default function Page({bannerMessage='', bannerColor = '#a3be8c', onBannerClose=()=>{}, children}: PageProps) {
+/**
+ *  Common Page wrapper component.
+ *  contains Header, Banner, and Footer components.
+ */
+export default function Page({
+        bannerMessage = '',
+        bannerColor = '#a3be8c',
+        onBannerClose = () => { bannerMessage = '' },
+        children
+    }: PageProps) {
+
     return (
         <div className="appContainer">
             <Header/>

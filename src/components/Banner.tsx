@@ -8,6 +8,10 @@ interface BannerProps {
     onClose(): void
 }
 
+/**
+ * Global Banner component, typically nested inside the
+ * Page component.
+ */
 export default function Banner(props: BannerProps) {
     if (props.message.length <= 0) return (<></>);
 
