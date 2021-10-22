@@ -18,6 +18,11 @@ export interface MDUpdateRequest {
     updateKey: string;
 }
 
+export interface MDDeleteRequest {
+    id: string;
+    updateKey: string;
+}
+
 export interface MDSearchParams {
     text?: string;
     limit?: number;
@@ -38,20 +43,19 @@ const apiPass = process.env.REACT_APP_API_PASS;
  * Make an API call to MDSnips API to fetch a Markdown Snippet.
  *
  * @param {string} id
- * @returns {Promise<MDSnippet|null>}
+ * @returns {Promise<MDSnippet>}
  */
-export async function getSnippet(id: string): Promise<MDSnippet | null> {
-        const headers = new Headers();
-        headers.append('Authorization', getAuthToken());
-        const response = await fetch(`${apiHost}/md/${id}`, {
-            headers: headers
-        });
-        if (response.ok) {
-            return response.json();
-        } else {
-            console.error(response.status, response.statusText);
-        }
-    return null;
+export async function getSnippet(id: string): Promise<MDSnippet> {
+    const headers = new Headers();
+    headers.append('Authorization', getAuthToken());
+    const response = await fetch(`${apiHost}/md/${id}`, {
+        headers: headers
+    });
+    if (response.ok) {
+        return response.json();
+    }
+
+    throw new Error(`${response.status}: ${response.statusText}`);
 }
 
 /**
@@ -135,26 +139,50 @@ export async function updateMDSnippet(req: MDUpdateRequest): Promise<MDSnippet |
         body: req.body,
         updateKey: req.updateKey
     };
-    try {
-        const headers = new Headers();
-        headers.append('Authorization', getAuthToken());
-        headers.append('Content-Type', 'application/json');
 
-        const response = await fetch(`${apiHost}/md`, {
-            headers: headers,
-            method: 'PATCH',
-            body: JSON.stringify(payload)
-        });
-        if (response.ok) {
-            return response.json();
-        } else {
-            console.error(response.statusText);
-        }
-    } catch (err: any) {
-        console.error(err.message);
+    const headers = new Headers();
+    headers.append('Authorization', getAuthToken());
+    headers.append('Content-Type', 'application/json');
+
+    const response = await fetch(`${apiHost}/md`, {
+        headers: headers,
+        method: 'PATCH',
+        body: JSON.stringify(payload)
+    });
+    if (response.ok) {
+        return response.json();
+    } else {
+        console.error(response.statusText);
     }
 
     return null;
+}
+
+
+/**
+ * Make an API call to MDSnips API to delete a Markdown Snippet.
+ *
+ * @param {MDDeleteRequest} req
+ * @returns {Promise<boolean>}
+ */
+export async function deleteMDSnippet(req: MDDeleteRequest): Promise<boolean> {
+    const payload = {
+        updateKey: req.updateKey
+    };
+    const headers = new Headers();
+    headers.append('Authorization', getAuthToken());
+    headers.append('Content-Type', 'application/json');
+
+    const response = await fetch(`${apiHost}/md/${req.id}`, {
+        headers: headers,
+        method: 'DELETE',
+        body: JSON.stringify(payload)
+    });
+    if (response.ok) {
+        return true;
+    }
+
+    throw new Error(`${response.status}: ${response.statusText}`);
 }
 
 /**

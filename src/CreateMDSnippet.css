@@ -32,6 +32,7 @@
     width: 100%;
     height: 50px;
     padding: 10px;
+    margin-right: 10px;
     text-decoration: none;
     font-weight: bold;
     font-family: inherit;
@@ -46,6 +47,10 @@
 .editor__submitButton:active,
 .editor__submitButton:focus {
     outline: ridge;
+}
+
+.red {
+    background: #bf616a;
 }
 
 @media screen and (min-width: 1160px) {
