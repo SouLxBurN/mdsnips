@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import Page from './components/Page';
 import MDEditor from '@uiw/react-md-editor';
+import { rehype } from 'rehype';
+import rehypeSanitize, {defaultSchema} from 'rehype-sanitize'
 import { getSnippet } from './service/MDApi';
 import './ViewMDSnippet.css';
 import './MDEditor.css';
@@ -61,12 +63,22 @@ export default function ViewMDSnippet() {
         setBannerMessage(errorMessage);
     }
 
+    // Scrubbing script/html from title field
+    let renderedTitle = title;
+    rehype()
+        .data('settings', {fragment: true})
+        .use(rehypeSanitize, defaultSchema)
+        .process(title)
+        .then((file) => {
+            renderedTitle = String(file);
+        })
+
     return (
         <Page bannerMessage={bannerMessage} bannerColor="#a3be8c" onBannerClose={() => onBannerClose}>
             <div className="viewMDSnippet">
-                <h1 className="mdTitle">{title}</h1>
+                <h1 className="mdTitle">{(renderedTitle)}</h1>
                 <hr />
-                <MDEditor.Markdown source={content} />
+                <MDEditor.Markdown rehypePlugins={[rehypeSanitize]} source={content} />
             </div>
         </Page>
     );

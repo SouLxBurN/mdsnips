@@ -5,6 +5,7 @@ import MDEditKey from './MDEditKey';
 import MDEditor from '@uiw/react-md-editor';
 import { MDSnippet, updateMDSnippet, deleteMDSnippet, getSnippet } from '../service/MDApi';
 import useWindowDimensions from '../hooks/useWindowDimensions';
+import rehypeSanitize from 'rehype-sanitize';
 
 interface UpdateMDFormProps {
     id: string;
@@ -74,6 +75,7 @@ export default function UpdateMDForm(props: UpdateMDFormProps) {
                     }}
                 />
                 <MDEditor
+                    previewOptions={{rehypePlugins: [rehypeSanitize]}}
                     value={content}
                     preview={width > 860 ? 'live' : 'edit'}
                     visiableDragbar={false}

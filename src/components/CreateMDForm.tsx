@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import MDTitle from './MDTitle';
 import MDEditor from '@uiw/react-md-editor';
+import rehypeSanitize from "rehype-sanitize";
 import { MDSnippet, createMDSnippet } from '../service/MDApi'
 import useWindowDimensions from '../hooks/useWindowDimensions';
 
@@ -37,6 +38,7 @@ export default function CreateMDForm(props: CreateMDFormProps) {
                     }}
                 />
                 <MDEditor
+                    previewOptions={{rehypePlugins: [rehypeSanitize]}}
                     preview={width > 860 ? 'live' : 'edit'}
                     value={content}
                     visiableDragbar={false}
