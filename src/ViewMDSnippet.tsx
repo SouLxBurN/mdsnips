@@ -19,8 +19,8 @@ interface ViewLocState {
 export default function ViewMDSnippet() {
     const updateKey = useLocation<ViewLocState>().state?.updateKey;
     const { id } = useParams<ViewMDSnippetParams>();
-    const [title, setTitle] = useState('Greetings Stranger!');
-    const [content, setContent] = useState('I\'m not surprized to see your kind here.');
+    const [title, setTitle] = useState<string>('');
+    const [content, setContent] = useState<string>('');
 
     let initBanner = '';
     if (updateKey) {
@@ -63,23 +63,27 @@ export default function ViewMDSnippet() {
         setBannerMessage(errorMessage);
     }
 
+    let renderContent = title && content;
+
     // Scrubbing script/html from title field
     let renderedTitle = title;
     rehype()
         .data('settings', {fragment: true})
         .use(rehypeSanitize, defaultSchema)
-        .process(title)
+        .process(title!)
         .then((file) => {
             renderedTitle = String(file);
         })
 
     return (
         <Page bannerMessage={bannerMessage} bannerColor="#a3be8c" onBannerClose={() => onBannerClose}>
-            <div className="viewMDSnippet">
-                <h1 className="mdTitle">{(renderedTitle)}</h1>
-                <hr />
-                <MDEditor.Markdown rehypePlugins={[rehypeSanitize]} source={content} />
-            </div>
+            { renderContent &&
+                <div className="viewMDSnippet">
+                    <h1 className="mdTitle">{(renderedTitle)}</h1>
+                    <hr />
+                    <MDEditor.Markdown rehypePlugins={[rehypeSanitize]} source={content} />
+                </div>
+            }
         </Page>
     );
 }
