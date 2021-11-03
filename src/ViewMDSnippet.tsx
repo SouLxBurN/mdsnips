@@ -78,11 +78,11 @@ export default function ViewMDSnippet() {
     return (
         <Page bannerMessage={bannerMessage} bannerColor="#a3be8c" onBannerClose={() => onBannerClose}>
             { renderContent &&
-                <div className="viewMDSnippet">
-                    <h1 className="mdTitle">{(renderedTitle)}</h1>
-                    <hr />
-                    <MDEditor.Markdown rehypePlugins={[rehypeSanitize]} source={content} />
-                </div>
+            <div className="viewMDSnippet">
+                <h1 className="mdTitle">{(renderedTitle)}</h1>
+                <hr />
+                <MDEditor.Markdown className="viewMD" rehypePlugins={[rehypeSanitize]} source={content} />
+            </div>
             }
         </Page>
     );

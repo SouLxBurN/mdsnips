@@ -1,15 +1,6 @@
 /*
  * Markdown Editor/View overides
  */
-.wmde-markdown h1, .wmde-markdown h2 {
+.viewMD h1, .viewMD h2 {
     border: none;
 }
-
-/* .wmde-markdown-color code[class*="language-"] { */
-/*     color: white; */
-/* } */
-
-/* .wmde-markdown pre code { */
-/*     background-color: black; */
-/*     text-shadow: none; */
-/* } */
