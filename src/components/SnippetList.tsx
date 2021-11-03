@@ -18,7 +18,7 @@ export default function SnippetList() {
         return (
             <li className="snippetList__item" key={snip.id}>
                 <p className="snippetList__item__title">
-                    <Link to={snip.id}>{snip.title}</Link>
+                    <Link to={"/"+snip.id}>{snip.title}</Link>
                 </p>
                 <p className="snippetList__item__date">{snip.createDate}</p>
             </li>

@@ -41,6 +41,7 @@ code {
 .snipContent {
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
     padding: 15px 4%;
 }
 
@@ -88,12 +89,11 @@ code {
 
 @media screen and (min-width: 1160px) {
     .snipContent__main {
-        flex: auto;
+        flex: 0 0 77%;
     }
 
     .snipContent__sidebar {
         flex: 0 0 22%;
-        margin-left: 10px;
     }
 }
 
