@@ -12,6 +12,7 @@ export default function MDTitle(props: MDTitleProps) {
                 maxLength={64}
                 value={props.value}
                 onChange={(e) => props.onChange(e.target.value)}
+                required
             />
         </div>
     )

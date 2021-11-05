@@ -11,6 +11,7 @@ export default function MDEditKey(props: MDEditKeyProps) {
                 value={props.value}
                 placeholder="Edit Key"
                 onChange={(e) => props.onChange(e.target.value)}
+                required
             />
         </div>
     )

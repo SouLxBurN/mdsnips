@@ -14,7 +14,7 @@
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
-    "@uiw/react-md-editor": "^3.6.0",
+    "@uiw/react-md-editor": "^3.6.5",
     "axios": "^0.21.1",
     "express-favicon": "^2.0.1",
     "react": "^17.0.2",

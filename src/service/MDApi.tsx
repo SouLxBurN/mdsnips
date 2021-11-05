@@ -149,13 +149,13 @@ export async function updateMDSnippet(req: MDUpdateRequest): Promise<MDSnippet |
         method: 'PATCH',
         body: JSON.stringify(payload)
     });
+
     if (response.ok) {
         return response.json();
-    } else {
-        console.error(response.statusText);
     }
 
-    return null;
+    console.error(response.statusText);
+    throw Error(await response.text());
 }
 
 
